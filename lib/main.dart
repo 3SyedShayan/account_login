@@ -1,11 +1,33 @@
 import 'package:account_login/firebase_options.dart';
+import 'package:account_login/screens/forgot_password.dart';
 import 'package:account_login/screens/login.dart';
+import 'package:account_login/screens/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
 const orange = Color.fromARGB(255, 255, 149, 0);
 const grey = Color.fromARGB(255, 107, 107, 107);
+const black = Color.fromARGB(255, 0, 0, 0);
+const white = Color.fromARGB(255, 255, 255, 255);
+final theme = ThemeData(
+  scaffoldBackgroundColor: white,
+  primaryColor: orange,
+  colorScheme: ColorScheme.light(primary: orange),
+  fontFamily: 'Poppins',
+  textTheme: TextTheme(),
+  inputDecorationTheme: InputDecorationTheme(
+    labelStyle: TextStyle(color: grey),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: orange,
+      foregroundColor: white,
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+      minimumSize: Size(double.infinity, 50),
+    ),
+  ),
+);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -17,6 +39,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: LoginScreen());
+    return MaterialApp(
+      theme: theme,
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
+    );
   }
 }
