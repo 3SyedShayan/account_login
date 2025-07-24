@@ -1,3 +1,4 @@
+import 'package:account_login/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isPasswordObscured = true;
   final _form = GlobalKey<FormState>();
   var _isLogin = false;
   var _enteredEmail = '';
@@ -43,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 247, 245, 245),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
         child: Form(
@@ -55,7 +58,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Login to your \naccount.',
                 style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
               ),
-              Text("Please sign in to your account"),
+              Text(
+                "Please sign in to your account",
+                style: TextStyle(color: grey),
+              ),
               SizedBox(height: 25),
               Text(
                 "Email Address",
@@ -86,9 +92,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   labelText: 'Enter Password',
                   border: OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordObscured
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      _isPasswordObscured = !_isPasswordObscured;
+                      setState(() {});
+                    },
+                  ),
                 ),
-                obscureText: true,
-                onChanged: (value) {},
+                obscureText: _isPasswordObscured,
+                // onChanged: (value) {},
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 6) {
                     return 'Please enter your password';
@@ -99,12 +116,48 @@ class _LoginScreenState extends State<LoginScreen> {
                   _enteredPassword = value!;
                 },
               ),
-              Text("Forgot Password?"),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "Forgot password?",
+                  style: TextStyle(color: orange),
+                ),
+              ),
+              SizedBox(height: 20),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(orange),
+                  minimumSize: WidgetStateProperty.all(
+                    Size(double.infinity, 50),
+                  ),
+                ),
                 onPressed: () {
                   onSubmit();
                 },
-                child: Text('Login'),
+                child: Text('Sign in', style: TextStyle(color: Colors.white)),
+              ),
+              SizedBox(height: 20),
+
+              Row(
+                children: [
+                  Expanded(child: Divider(endIndent: 20)),
+                  Text('Or sign in with', style: TextStyle(color: grey)),
+                  Expanded(child: Divider(indent: 20)),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't have an account?"),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _isLogin = !_isLogin;
+                      });
+                    },
+                    child: Text('Register', style: TextStyle(color: orange)),
+                  ),
+                ],
               ),
             ],
           ),
