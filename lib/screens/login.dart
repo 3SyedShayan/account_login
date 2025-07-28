@@ -33,13 +33,15 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     } else {
       try {
-        final userCredential = await _firebase.createUserWithEmailAndPassword(
-          email: _enteredEmail,
-          password: _enteredPassword,
+        final userCredential = await _firebase.signInWithCredential(
+          EmailAuthProvider.credential(
+            email: _enteredEmail,
+            password: _enteredPassword,
+          ),
         );
-        print('User created: ${userCredential.user?.email}');
+        print('User logged in: ${userCredential.user?.email}');
       } on FirebaseAuthException catch (error) {
-        print('Error creating user: $error');
+        print('Error logging in: $error');
       }
     }
   }
