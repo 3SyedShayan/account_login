@@ -36,6 +36,7 @@ migrate_working_dir/
 /macos
 /linux
 /web
+/lib/auth/phone_number.dart
 
 
 # Symbolication related

@@ -2,6 +2,7 @@ import 'package:account_login/firebase_options.dart';
 import 'package:account_login/screens/forgot_password.dart';
 import 'package:account_login/screens/login.dart';
 import 'package:account_login/screens/onboarding.dart';
+import 'package:account_login/screens/otp.dart';
 import 'package:account_login/screens/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: OnBoarding(),
+      home: OTPScreen(),
     );
   }
 }
