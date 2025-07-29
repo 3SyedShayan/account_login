@@ -62,7 +62,10 @@ class _OTPScreenState extends State<OTPScreen> {
       verificationId: verificationId,
       smsCode: otp,
     );
+    print("The credential is $credential");
   }
+
+  TextEditingController _otpController = TextEditingController();
 
   Timer? _timer;
   int _start = 30;
@@ -81,6 +84,7 @@ class _OTPScreenState extends State<OTPScreen> {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: _otpController,
               decoration: InputDecoration(
                 labelText: 'OTP',
                 border: OutlineInputBorder(),
@@ -91,7 +95,7 @@ class _OTPScreenState extends State<OTPScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Handle OTP verification
+                _verifyOTP(otp.toString());
               },
               child: Text('Verify OTP'),
             ),
