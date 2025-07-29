@@ -1,6 +1,7 @@
 import 'package:account_login/firebase_options.dart';
 import 'package:account_login/screens/forgot_password.dart';
 import 'package:account_login/screens/login.dart';
+import 'package:account_login/screens/onboarding.dart';
 import 'package:account_login/screens/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,16 @@ final theme = ThemeData(
   primaryColor: orange,
   colorScheme: ColorScheme.light(primary: orange),
   fontFamily: 'Poppins',
-  textTheme: TextTheme(),
+  textTheme: TextTheme(
+    // bodyLarge: TextStyle(color: Colors.white),
+    // bodyMedium: TextStyle(color: Colors.white),
+    // bodySmall: TextStyle(color: Colors.white),
+  ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(color: grey),
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(foregroundColor: Colors.white),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -42,7 +50,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: OnBoarding(),
     );
   }
 }

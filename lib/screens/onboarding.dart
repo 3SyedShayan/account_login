@@ -1,5 +1,6 @@
-import 'package:burger_onboarding/widgets/arc_painter.dart';
-import 'package:burger_onboarding/widgets/container.dart';
+import 'package:account_login/screens/login.dart';
+import 'package:account_login/widgets/arc_painter.dart';
+import 'package:account_login/widgets/container.dart';
 import 'package:flutter/material.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -94,10 +95,10 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
           child: IconButton(
             onPressed: () {
-              if (slide > 1) {
-                slide = 1;
-                onBoardChange();
-              }
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
             },
             icon: Icon(Icons.arrow_forward),
 
