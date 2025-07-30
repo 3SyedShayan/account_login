@@ -1,10 +1,8 @@
 import 'package:account_login/auth/phone_number.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 FirebaseAuth _firebase = FirebaseAuth.instance;
 
@@ -16,28 +14,36 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  String verificationId = '';
-  int? otp;
-  bool otpSent = false;
+  late String verificationId;
+  bool otpSent = true;
+  TextEditingController _otpController = TextEditingController();
+  Timer? _timer;
+  int _start = 60;
+
   void initState() {
     super.initState();
-    _startTimer();
     _sendOTP();
+    _startTimer();
   }
 
   void _startTimer() {
-    print("Starting timer for OTP");
-    _timer = Timer.periodic(Duration(seconds: 150), (timer) {
-      setState(() {
-        _start = 0;
-      });
+    print("Starting timer for OTP resend");
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_start > 0) {
+        setState(() {
+          _start--;
+        });
+      } else {
+        _timer?.cancel();
+        setState(() {});
+      }
     });
   }
 
   void _sendOTP() {
-    print("Sending OTP to user's email");
     _firebase.verifyPhoneNumber(
       phoneNumber: phoneNumber,
+      timeout: Duration(seconds: 60),
       verificationCompleted: (PhoneAuthCredential credential) async {
         print("Verification completed: ${credential.smsCode}");
         await _firebase.signInWithCredential(credential);
@@ -65,29 +71,16 @@ class _OTPScreenState extends State<OTPScreen> {
     );
     try {
       await _firebase.signInWithCredential(credential);
-      print("OTP verified successfully");
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('OTP verified successfully')));
-      // Navigator.pop(context); // Navigate back after successful verification
     } catch (e) {
-      print("Error verifying OTP: $e");
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Error verifying OTP: $e')));
     }
-    print("The credential is ${credential}");
-    print("The credential sms is ${credential.smsCode}");
-    print("Verifying OTP: $otp");
-    print(
-      "Verification Id is: $verificationId, SMS Code: ${credential.smsCode}",
-    );
   }
 
-  TextEditingController _otpController = TextEditingController();
-
-  Timer? _timer;
-  int _start = 30;
   @override
   Widget build(BuildContext context) {
     Widget otpField;
@@ -118,6 +111,20 @@ class _OTPScreenState extends State<OTPScreen> {
               },
               child: Text('Verify OTP'),
             ),
+            TextButton(
+              onPressed: () {
+                if (_start == 0) {
+                  _sendOTP();
+                  _start = 60;
+                  _startTimer();
+                }
+              },
+
+              child: Text(
+                'Resend OTP (${_start}s)',
+                style: TextStyle(color: _start > 0 ? Colors.grey : Colors.blue),
+              ),
+            ),
           ],
         ),
       );
@@ -126,7 +133,6 @@ class _OTPScreenState extends State<OTPScreen> {
         child: Text('Sending OTP...', style: TextStyle(fontSize: 18)),
       );
     }
-    print("Building OTP Screen");
     return Scaffold(
       appBar: AppBar(title: Text('OTP Verification')),
       body: otpField,
