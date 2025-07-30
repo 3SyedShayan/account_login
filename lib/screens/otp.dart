@@ -19,6 +19,14 @@ class _OTPScreenState extends State<OTPScreen> {
   TextEditingController _otpController = TextEditingController();
   Timer? _timer;
   int _start = 60;
+  List<TextEditingController> _otpControllers = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
+  List<FocusNode> _otpFocusNode = List.generate(6, (_) => FocusNode());
+  String getOTP() {
+    return _otpControllers.map((controller) => controller.text).join();
+  }
 
   void initState() {
     super.initState();
@@ -81,6 +89,12 @@ class _OTPScreenState extends State<OTPScreen> {
     }
   }
 
+  void dispose() {
+    _timer?.cancel();
+    _otpController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget otpField;
@@ -90,19 +104,44 @@ class _OTPScreenState extends State<OTPScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text("Phone Verification"),
             Text(
-              'Enter the OTP sent to your email',
+              'Enter the verification code, send to your phone number +921234567890',
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 20),
-            TextField(
-              controller: _otpController,
-              decoration: InputDecoration(
-                labelText: 'OTP',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            Row(
+              children: List.generate(6, (index) {
+                return Container(
+                  width: 40,
+                  height: 40,
+                  child: TextFormField(
+                    focusNode: _otpFocusNode[index],
+                    controller: _otpControllers[index],
+                    decoration: InputDecoration(border: OutlineInputBorder()),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    maxLength: 1,
+                    onChanged: (value) {
+                      if (value.isNotEmpty) {
+                        if (index < 5) {
+                          FocusScope.of(
+                            context,
+                          ).requestFocus(_otpFocusNode[index + 1]);
+                        } else {
+                          FocusScope.of(context).unfocus();
+                        }
+                      } else {
+                        if (index > 0) {
+                          FocusScope.of(
+                            context,
+                          ).requestFocus(_otpFocusNode[index - 1]);
+                        }
+                      }
+                    },
+                  ),
+                );
+              }),
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -134,7 +173,7 @@ class _OTPScreenState extends State<OTPScreen> {
       );
     }
     return Scaffold(
-      appBar: AppBar(title: Text('OTP Verification')),
+      appBar: AppBar(title: Text('OTP')),
       body: otpField,
     );
   }
