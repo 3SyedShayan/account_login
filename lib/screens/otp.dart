@@ -102,9 +102,12 @@ class _OTPScreenState extends State<OTPScreen> {
       otpField = Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Phone Verification"),
+            Text(
+              "Phone Verification",
+              style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+            ),
             Text(
               'Enter the verification code, send to your phone number +921234567890',
               style: TextStyle(fontSize: 18),
@@ -113,32 +116,42 @@ class _OTPScreenState extends State<OTPScreen> {
             Row(
               children: List.generate(6, (index) {
                 return Container(
-                  width: 40,
-                  height: 40,
-                  child: TextFormField(
-                    focusNode: _otpFocusNode[index],
-                    controller: _otpControllers[index],
-                    decoration: InputDecoration(border: OutlineInputBorder()),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    maxLength: 1,
-                    onChanged: (value) {
-                      if (value.isNotEmpty) {
-                        if (index < 5) {
-                          FocusScope.of(
-                            context,
-                          ).requestFocus(_otpFocusNode[index + 1]);
-                        } else {
-                          FocusScope.of(context).unfocus();
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  width: 60,
+                  height: 50,
+                  child: Center(
+                    child: TextFormField(
+                      style: TextStyle(fontSize: 24),
+                      textAlign: TextAlign.center,
+                      focusNode: _otpFocusNode[index],
+                      controller: _otpControllers[index],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        counterText: '',
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      maxLength: 1,
+
+                      onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          if (index < 5) {
+                            FocusScope.of(
+                              context,
+                            ).requestFocus(_otpFocusNode[index + 1]);
+                          } else {
+                            FocusScope.of(context).unfocus();
+                          }
                         }
-                      } else {
-                        if (index > 0) {
-                          FocusScope.of(
-                            context,
-                          ).requestFocus(_otpFocusNode[index - 1]);
-                        }
-                      }
-                    },
+                        // else {
+                        //   if (index > 0) {
+                        //     FocusScope.of(
+                        //       context,
+                        //     ).requestFocus(_otpFocusNode[index - 1]);
+                        //   }
+                        // }
+                      },
+                    ),
                   ),
                 );
               }),
