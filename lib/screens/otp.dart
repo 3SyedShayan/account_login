@@ -50,6 +50,7 @@ class _OTPScreenState extends State<OTPScreen> {
         setState(() {
           otpSent = true;
         });
+        this.verificationId = verificationId;
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         print("Code auto-retrieval timeout");
@@ -58,11 +59,29 @@ class _OTPScreenState extends State<OTPScreen> {
   }
 
   void _verifyOTP(String otp) async {
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+    PhoneAuthCredential credential = await PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: otp,
     );
-    print("The credential is $credential");
+    try {
+      await _firebase.signInWithCredential(credential);
+      print("OTP verified successfully");
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('OTP verified successfully')));
+      // Navigator.pop(context); // Navigate back after successful verification
+    } catch (e) {
+      print("Error verifying OTP: $e");
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error verifying OTP: $e')));
+    }
+    print("The credential is ${credential}");
+    print("The credential sms is ${credential.smsCode}");
+    print("Verifying OTP: $otp");
+    print(
+      "Verification Id is: $verificationId, SMS Code: ${credential.smsCode}",
+    );
   }
 
   TextEditingController _otpController = TextEditingController();
@@ -95,7 +114,7 @@ class _OTPScreenState extends State<OTPScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                _verifyOTP(otp.toString());
+                _verifyOTP(_otpController.text);
               },
               child: Text('Verify OTP'),
             ),
