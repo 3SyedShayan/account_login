@@ -142,26 +142,18 @@ class _OTPScreenState extends State<OTPScreen> {
                           } else {
                             FocusScope.of(context).unfocus();
                           }
+                        } else {
+                          if (index > 0) {
+                            FocusScope.of(
+                              context,
+                            ).requestFocus(_otpFocusNode[index - 1]);
+                          }
                         }
-                        // else {
-                        //   if (index > 0) {
-                        //     FocusScope.of(
-                        //       context,
-                        //     ).requestFocus(_otpFocusNode[index - 1]);
-                        //   }
-                        // }
                       },
                     ),
                   ),
                 );
               }),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                _verifyOTP(_otpController.text);
-              },
-              child: Text('Verify OTP'),
             ),
             TextButton(
               onPressed: () {
@@ -176,6 +168,26 @@ class _OTPScreenState extends State<OTPScreen> {
                 'Resend OTP (${_start}s)',
                 style: TextStyle(color: _start > 0 ? Colors.grey : Colors.blue),
               ),
+            ),
+            SizedBox(height: 20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.access_time, color: Colors.grey),
+                SizedBox(width: 8),
+                Text(
+                  '${_start.toDouble()}',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                _verifyOTP(_otpController.text);
+              },
+              child: Text('Verify OTP'),
             ),
           ],
         ),
