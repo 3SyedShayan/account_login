@@ -37,7 +37,6 @@ migrate_working_dir/
 /linux
 /web
 /lib/auth/phone_number.dart
-/lib/screens/reset_password.dart
 
 # Symbolication related
 app.*.symbols

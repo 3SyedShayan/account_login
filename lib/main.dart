@@ -4,6 +4,7 @@ import 'package:account_login/screens/login.dart';
 import 'package:account_login/screens/onboarding.dart';
 import 'package:account_login/screens/otp.dart';
 import 'package:account_login/screens/register.dart';
+import 'package:account_login/screens/reset_password.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: OTPScreen(),
+      home: ResetPasswordScreen(),
     );
   }
 }
