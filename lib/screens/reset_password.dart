@@ -1,5 +1,11 @@
+import 'dart:ui';
+
 import 'package:account_login/main.dart';
+import 'package:account_login/widgets/password_changed.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+final _firebase = FirebaseAuth.instance;
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -20,14 +26,21 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     var isValid = _form.currentState!.validate();
 
     if (isValid) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Passwords are valid')));
+      final sendResetEmail = _firebase.sendPasswordResetEmail(
+        email: "shaniessajjad@gmail.com",
+      );
+      // _firebase.confirmPasswordReset(code: code, newPassword: newPassword)
+      print(sendResetEmail);
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => PasswordChanged(),
+      );
       password = pass1.text;
+      // showModalBottomSheet
     } else {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Passwords do not match')));
+      ).showSnackBar(SnackBar(content: Text("Passwords are Invalid")));
     }
     print(isValid);
   }

@@ -1,4 +1,5 @@
 import 'package:account_login/firebase_options.dart';
+import 'package:account_login/screens/dashboard.dart';
 import 'package:account_login/screens/forgot_password.dart';
 import 'package:account_login/screens/login.dart';
 import 'package:account_login/screens/onboarding.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: ResetPasswordScreen(),
+      home: DashboardScreen(),
     );
   }
 }

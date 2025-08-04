@@ -1,16 +1,17 @@
 import 'package:account_login/screens/login.dart';
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class PasswordChanged extends StatelessWidget {
+  const PasswordChanged({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset('assets/images/celebration.png', width: 100, height: 100),
+          Image.asset('assets/images/fireworks.png', width: 100, height: 100),
           Text("Password Changed", style: TextStyle(fontSize: 30)),
           Text(
             "Password changed successfully, you can login again with your new credentials",
@@ -25,6 +26,7 @@ class MyWidget extends StatelessWidget {
               );
             },
           ),
+          SizedBox(height: 30),
         ],
       ),
     );
