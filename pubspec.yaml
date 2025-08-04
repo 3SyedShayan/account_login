@@ -23,3 +23,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/food/burger/
+    - assets/images/food/pizza/
+    - assets/images/food/drinks/
+    - assets/images/food/desserts/

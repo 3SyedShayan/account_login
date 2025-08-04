@@ -1,3 +1,4 @@
+import 'package:account_login/widgets/dashboard_gridview.dart';
 import 'package:account_login/widgets/dashboard_header.dart';
 import 'package:flutter/material.dart';
 
@@ -93,6 +94,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
           onCategorySelected(),
+          Expanded(
+            child: DashboardGridView(
+              selectedCategory: categories[selectedCategory]["label"]
+                  .toLowerCase(),
+            ),
+          ),
         ],
       ),
     );
