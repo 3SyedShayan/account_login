@@ -4,6 +4,7 @@ List<FoodItem> foodData = [
   // BURGERS
   FoodItem(
     name: "Zinger Burger",
+    category: FoodCategory.burger,
     imageUrl: "assets/images/food/burger/1.jpg",
     price: 350,
     description:
@@ -13,6 +14,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Cheese Burger",
+    category: FoodCategory.burger,
     imageUrl: "assets/images/food/burger/2.jpg",
     price: 400,
     description:
@@ -22,6 +24,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "BBQ Beef Burger",
+    category: FoodCategory.burger,
     imageUrl: "assets/images/food/burger/3.jpg",
     price: 450,
     description:
@@ -31,6 +34,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Chicken Deluxe",
+    category: FoodCategory.burger,
     imageUrl: "assets/images/food/burger/4.jpg",
     price: 420,
     description:
@@ -42,6 +46,8 @@ List<FoodItem> foodData = [
   // DRINKS
   FoodItem(
     name: "Fresh Orange Juice",
+    category: FoodCategory.drink,
+
     imageUrl: "assets/images/food/drinks/1.jpg",
     price: 180,
     description:
@@ -51,6 +57,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Chocolate Milkshake",
+    category: FoodCategory.drink,
     imageUrl: "assets/images/food/drinks/2.jpg",
     price: 250,
     description:
@@ -60,6 +67,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Mango Smoothie",
+    category: FoodCategory.drink,
     imageUrl: "assets/images/food/drinks/3.jpg",
     price: 220,
     description:
@@ -69,6 +77,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Cold Coffee",
+    category: FoodCategory.drink,
     imageUrl: "assets/images/food/drinks/4.jpg",
     price: 200,
     description:
@@ -80,6 +89,7 @@ List<FoodItem> foodData = [
   // PIZZAS
   FoodItem(
     name: "Margherita Pizza",
+    category: FoodCategory.pizza,
     imageUrl: "assets/images/food/pizza/1.jpg",
     price: 650,
     description:
@@ -89,6 +99,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Pepperoni Special",
+    category: FoodCategory.pizza,
     imageUrl: "assets/images/food/pizza/2.jpg",
     price: 750,
     description:
@@ -98,6 +109,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "BBQ Chicken Pizza",
+    category: FoodCategory.pizza,
     imageUrl: "assets/images/food/pizza/3.jpg",
     price: 850,
     description:
@@ -107,6 +119,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Veggie Supreme",
+    category: FoodCategory.pizza,
     imageUrl: "assets/images/food/pizza/4.jpg",
     price: 700,
     description:
@@ -114,10 +127,9 @@ List<FoodItem> foodData = [
     ratings: 4.4,
     duration: 22,
   ),
-
-  // DESSERTS
   FoodItem(
     name: "Chocolate Fudge Cake",
+    category: FoodCategory.dessert,
     imageUrl: "assets/images/food/desserts/1.jpg",
     price: 320,
     description:
@@ -127,6 +139,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Strawberry Cheesecake",
+    category: FoodCategory.dessert,
     imageUrl: "assets/images/food/desserts/2.jpg",
     price: 380,
     description:
@@ -136,6 +149,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Vanilla Ice Cream",
+    category: FoodCategory.dessert,
     imageUrl: "assets/images/food/desserts/3.jpg",
     price: 150,
     description:
@@ -145,6 +159,7 @@ List<FoodItem> foodData = [
   ),
   FoodItem(
     name: "Apple Pie",
+    category: FoodCategory.dessert,
     imageUrl: "assets/images/food/desserts/4.jpg",
     price: 280,
     description:

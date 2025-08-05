@@ -71,9 +71,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  int selectedBottomNavIndex = 0;
+  void onBottomNavTap(int index) {
+    setState(() {
+      selectedBottomNavIndex = index;
+    });
+  }
+
+  List<Map<String, dynamic>> bottomNavItems = [
+    {"icon": Icons.home, "label": "Home"},
+    {"icon": Icons.search, "label": "Search"},
+    {"icon": Icons.favorite_border, "label": "Favorites"},
+    {"icon": Icons.person, "label": "Profile"},
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedBottomNavIndex,
+        onTap: onBottomNavTap,
+        type: BottomNavigationBarType.fixed, // Show all tabs
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.orange[600],
+        unselectedItemColor: Colors.grey[400],
+        selectedFontSize: 12,
+        unselectedFontSize: 10,
+        elevation: 0,
+        items: bottomNavItems.map((item) {
+          int index = bottomNavItems.indexOf(item);
+          return BottomNavigationBarItem(
+            icon: Container(
+              padding: EdgeInsets.symmetric(vertical: 4),
+              child: Icon(
+                item["icon"],
+                size: index == selectedBottomNavIndex ? 28 : 24,
+              ),
+            ),
+            label: item["label"],
+          );
+        }).toList(),
+      ),
       body: Column(
         children: [
           DashboardHeader(),

@@ -1,5 +1,8 @@
+enum FoodCategory { pizza, burger, dessert, drink }
+
 class FoodItem {
   final String name;
+  final FoodCategory category;
   final String imageUrl;
   final double price;
   final String description;
@@ -8,6 +11,7 @@ class FoodItem {
 
   FoodItem({
     required this.name,
+    required this.category,
     required this.imageUrl,
     required this.price,
     required this.description,
