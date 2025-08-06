@@ -1,3 +1,4 @@
+import 'package:account_login/screens/notifications.dart';
 import 'package:flutter/material.dart';
 
 class DashboardHeader extends StatefulWidget {
@@ -29,7 +30,12 @@ class _DashboardHeaderState extends State<DashboardHeader> {
           top: 50,
           right: 65,
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+              );
+            },
             icon: Icon(
               Icons.notifications_none_outlined,
               color: Colors.white,

@@ -43,7 +43,6 @@ List<FoodItem> foodData = [
     duration: 28,
   ),
 
-  // DRINKS
   FoodItem(
     name: "Fresh Orange Juice",
     category: FoodCategory.drink,

@@ -10,7 +10,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int selectedCategory = 0;
+  int selectedCategory = 1;
   void onSelectCategory(int index) {
     setState(() {
       selectedCategory = index;
@@ -19,13 +19,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   List<Map<String, dynamic>> categories = [
     {"icon": Icons.fastfood, "label": "Burger"},
-    {"icon": Icons.cake, "label": "Desserts"},
-    {"icon": Icons.local_drink, "label": "Drinks"},
+    {"icon": Icons.cake, "label": "Dessert"},
+    {"icon": Icons.local_drink, "label": "Drink"},
     {"icon": Icons.local_pizza, "label": "Pizza"},
   ];
 
   Widget onCategorySelected() {
     return Container(
+      alignment: Alignment.center,
       height: 100,
       child: ListView(
         padding: EdgeInsets.only(left: 20),
@@ -46,7 +47,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 width: 80,
-                // height: 200,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -90,7 +90,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedBottomNavIndex,
         onTap: onBottomNavTap,
-        type: BottomNavigationBarType.fixed, // Show all tabs
+        type: BottomNavigationBarType.shifting, // Show all tabs
         backgroundColor: Colors.white,
         selectedItemColor: Colors.orange[600],
         unselectedItemColor: Colors.grey[400],

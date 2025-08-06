@@ -2,6 +2,7 @@ import 'package:account_login/firebase_options.dart';
 import 'package:account_login/screens/dashboard.dart';
 import 'package:account_login/screens/forgot_password.dart';
 import 'package:account_login/screens/login.dart';
+import 'package:account_login/screens/notifications.dart';
 import 'package:account_login/screens/onboarding.dart';
 import 'package:account_login/screens/otp.dart';
 import 'package:account_login/screens/register.dart';
