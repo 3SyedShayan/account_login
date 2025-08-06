@@ -152,7 +152,31 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             ),
         ],
       ),
-      body: Column(children: [Container(height: 1, color: Colors.grey[200])]),
+      body: Column(
+        children: [
+          Container(height: 1, color: Colors.grey[200]),
+          Expanded(
+            child: notifications.isEmpty
+                ? Text("Nothing To Show")
+                : Container(
+                    color: Colors.white,
+                    child: ListView(
+                      children: [
+                        _buildSectionHeader("Today"),
+                        ...notifications
+                            .where((n) => n['time'] == "Today")
+                            .map((n) => _buildNotificationItem(n)),
+                        _buildSectionHeader("Yesterday"),
+
+                        ...notifications
+                            .where((n) => n['time'] == 'Yesterday')
+                            .map((n) => _buildNotificationItem(n)),
+                      ],
+                    ),
+                  ),
+          ),
+        ],
+      ),
     );
   }
 
