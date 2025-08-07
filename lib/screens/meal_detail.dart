@@ -1,5 +1,6 @@
 import 'package:account_login/models/dummy_data.dart';
 import 'package:account_login/models/food_item.dart';
+import 'package:account_login/utils/icon_style.dart';
 import 'package:account_login/utils/text_styles.dart';
 import 'package:account_login/widgets/single_food.dart';
 import 'package:flutter/material.dart';
@@ -35,17 +36,11 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
 
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 1.5),
-            ),
-            child: Icon(Icons.arrow_back, color: Colors.white),
-          ),
+        leading: TransparentIcon(
+          icon: Icons.arrow_back_ios_new,
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
 
         title: Align(
@@ -58,21 +53,9 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 1.5),
-              ),
-              height: 40,
-              width: 40,
-              child: IconButton(
-                alignment: Alignment.center,
-                icon: Icon(Icons.favorite_border_outlined, color: Colors.white),
-                onPressed: () {
-                  // Handle heart button press
-                },
-              ),
+            child: TransparentIcon(
+              icon: Icons.favorite_border,
+              onPressed: () {},
             ),
           ),
         ],

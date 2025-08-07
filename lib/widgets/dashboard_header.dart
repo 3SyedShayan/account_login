@@ -1,4 +1,5 @@
 import 'package:account_login/screens/notifications.dart';
+import 'package:account_login/utils/icon_style.dart';
 import 'package:flutter/material.dart';
 
 class DashboardHeader extends StatefulWidget {
@@ -19,11 +20,13 @@ class _DashboardHeaderState extends State<DashboardHeader> {
       children: [
         Image.asset("assets/images/fast-food-cover.jpg"),
         Positioned(
-          top: 50,
+          top: 58,
           right: 20,
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search, color: Colors.white, size: 35),
+          child: TransparentIcon(
+            icon: Icons.search,
+            onPressed: () {
+              // Implement search functionality
+            },
           ),
         ),
         Positioned(
@@ -36,10 +39,16 @@ class _DashboardHeaderState extends State<DashboardHeader> {
                 MaterialPageRoute(builder: (context) => NotificationsScreen()),
               );
             },
-            icon: Icon(
-              Icons.notifications_none_outlined,
-              color: Colors.white,
-              size: 35,
+            icon: TransparentIcon(
+              icon: Icons.notifications_none_outlined,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationsScreen(),
+                  ),
+                );
+              },
             ),
           ),
         ),
