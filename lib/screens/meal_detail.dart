@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:account_login/models/dummy_data.dart';
 import 'package:account_login/models/food_item.dart';
 import 'package:account_login/widgets/transparent_icon.dart';
@@ -21,6 +23,7 @@ class MealDetailScreen extends StatefulWidget {
 
 class _MealDetailScreenState extends State<MealDetailScreen> {
   late List<int> randomIndices = [];
+  int _totalQuantity = 1;
 
   void _generateRandomIndices() {
     final filteredData = foodData
@@ -41,27 +44,42 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
     print("the list is $randomIndices");
   }
 
+  late FoodItem selectedFood;
   @override
   void initState() {
     super.initState();
     _generateRandomIndices();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final totalWidth = mediaQuery.size.width;
-    FoodItem selectedFood = foodData
+    selectedFood = foodData
         .where(
           (item) =>
               item.category.name.toLowerCase() ==
               widget.mealCategory.toLowerCase(),
         )
         .toList()[widget.mealIndex];
+  }
+
+  void changeQuantity(String operation) {
+    if (operation == '-') {
+      if (_totalQuantity == 1) {
+        return;
+      }
+      setState(() {
+        _totalQuantity--;
+      });
+    } else if (operation == '+') {
+      setState(() {
+        _totalQuantity++;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final totalWidth = mediaQuery.size.width;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: TransparentIcon(
@@ -88,6 +106,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: stickyAddToCart(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(3.0),
@@ -217,6 +236,61 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
             )
             .toList(),
         index: randomIndices[index],
+      ),
+    );
+  }
+
+  Widget stickyAddToCart() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(16, 12, 16, 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 2)),
+        ],
+      ),
+      child: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: VisualDensity.minimumDensity,
+              child: Row(
+                // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () => changeQuantity('-'),
+                    icon: Icon(Icons.remove),
+                  ),
+                  Text(
+                    '$_totalQuantity',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    onPressed: () => changeQuantity('+'),
+                    icon: Icon(Icons.add),
+                  ),
+                  Spacer(),
+                  Text(
+                    '\$${(selectedFood.price * _totalQuantity).toStringAsFixed(2)}',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.yellow[800],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Add to cart functionality
+              },
+              child: Text('Add to Cart'),
+            ),
+          ],
+        ),
       ),
     );
   }
