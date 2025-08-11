@@ -1,5 +1,5 @@
 import 'package:account_login/screens/notifications.dart';
-import 'package:account_login/utils/icon_style.dart';
+import 'package:account_login/widgets/transparent_icon.dart';
 import 'package:flutter/material.dart';
 
 class DashboardHeader extends StatefulWidget {

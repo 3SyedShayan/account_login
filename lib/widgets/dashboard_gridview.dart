@@ -1,6 +1,6 @@
 import 'package:account_login/models/dummy_data.dart';
 import 'package:account_login/screens/meal_detail.dart';
-import 'package:account_login/widgets/single_food.dart';
+import 'package:account_login/widgets/single_meal.dart';
 import 'package:flutter/material.dart';
 
 class DashboardGridView extends StatelessWidget {
@@ -28,7 +28,7 @@ class DashboardGridView extends StatelessWidget {
       ),
       itemCount: foodCategories.length,
       itemBuilder: (context, index) {
-        return SingleFood(foodCategories: foodCategories, index: index);
+        return SingleMeal(foodCategories: foodCategories, index: index);
       },
     );
   }
