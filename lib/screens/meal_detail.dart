@@ -242,7 +242,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
 
   Widget stickyAddToCart() {
     return Container(
-      padding: EdgeInsets.fromLTRB(16, 12, 16, 16),
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -254,7 +254,6 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: VisualDensity.minimumDensity,
               child: Row(
                 // mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
