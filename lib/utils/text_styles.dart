@@ -6,4 +6,8 @@ class AppTextStyles {
     fontWeight: FontWeight.normal,
     color: Colors.grey,
   );
+  static const TextStyle bodySmallBold = TextStyle(
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+  );
 }

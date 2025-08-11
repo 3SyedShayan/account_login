@@ -1,3 +1,4 @@
+import 'package:account_login/utils/text_styles.dart';
 import 'package:account_login/widgets/dashboard_gridview.dart';
 import 'package:account_login/widgets/dashboard_header.dart';
 import 'package:flutter/material.dart';
@@ -118,13 +119,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.fromLTRB(20, 0, 10, 10),
             child: Row(
               children: [
-                Text("Find by Category"),
+                Text("Find by Category", style: AppTextStyles.bodySmallBold),
                 Spacer(),
                 TextButton(
                   onPressed: () {},
                   child: Text(
                     "See All",
-                    style: TextStyle(color: Colors.yellow[800]),
+                    style: AppTextStyles.bodySmallBold.copyWith(
+                      color: Colors.orange[400],
+                    ),
                   ),
                 ),
               ],

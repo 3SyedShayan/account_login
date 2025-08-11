@@ -1,4 +1,5 @@
 import 'package:account_login/screens/notifications.dart';
+import 'package:account_login/utils/text_styles.dart';
 import 'package:account_login/widgets/transparent_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
       children: [
         Image.asset("assets/images/fast-food-cover.jpg"),
         Positioned(
-          top: 58,
+          top: 40,
           right: 20,
           child: TransparentIcon(
             icon: Icons.search,
@@ -30,30 +31,20 @@ class _DashboardHeaderState extends State<DashboardHeader> {
           ),
         ),
         Positioned(
-          top: 50,
-          right: 65,
-          child: IconButton(
+          top: 40,
+          right: 70,
+          child: TransparentIcon(
+            icon: Icons.notifications_none_outlined,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => NotificationsScreen()),
               );
             },
-            icon: TransparentIcon(
-              icon: Icons.notifications_none_outlined,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NotificationsScreen(),
-                  ),
-                );
-              },
-            ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,12 +52,16 @@ class _DashboardHeaderState extends State<DashboardHeader> {
               Row(
                 children: [
                   DropdownButton(
+                    underline: Container(),
                     value: selectedCity,
-                    icon: Icon(Icons.arrow_drop_down, color: Colors.white),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.white,
+                    ),
                     items: cities.map((String city) {
                       return DropdownMenuItem(
                         value: city,
-                        child: Text(city),
+                        child: Text(city, style: AppTextStyles.bodySmallBold),
                         onTap: () {
                           setState(() {});
                         },
@@ -74,9 +69,16 @@ class _DashboardHeaderState extends State<DashboardHeader> {
                     }).toList(),
                     selectedItemBuilder: (BuildContext context) {
                       return cities.map((String city) {
-                        return Text(
-                          "Your Location",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        return Row(
+                          children: [
+                            Text(
+                              "Your Location",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
                         );
                       }).toList();
                     },
@@ -99,8 +101,12 @@ class _DashboardHeaderState extends State<DashboardHeader> {
               ),
               SizedBox(height: 10),
               Text(
-                "Provide The Best\nFood For you",
-                style: TextStyle(color: Colors.white, fontSize: 24),
+                "Provide the best\nfood for you",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
