@@ -1,22 +1,26 @@
+import 'package:account_login/models/cart_item.dart';
 import 'package:account_login/models/food_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ShoppingCart extends StateNotifier<Map<FoodItem, int>> {
-  ShoppingCart() : super({});
+final shoppingCartProvider =
+    StateNotifierProvider<ShoppingCart, List<CartItem>>((ref) {
+      return ShoppingCart();
+    });
+
+class ShoppingCart extends StateNotifier<List<CartItem>> {
+  ShoppingCart() : super([]);
 
   void addItem(FoodItem item, int quantity) {
     if (quantity <= 0) return; // Don't add negative/zero quantities
 
-    state = {...state, item: (state[item] ?? 0) + quantity};
+    state = [...state, CartItem(foodItem: item, quantity: quantity)];
   }
 
   void removeItem(FoodItem item) {
-    final newState = Map<FoodItem, int>.from(state);
-    newState.remove(item);
-    state = newState;
+    state = state.where((cartItem) => cartItem.foodItem != item).toList();
   }
 
   void clearCart() {
-    state = {};
+    state = [];
   }
 }
